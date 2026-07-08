@@ -8,7 +8,8 @@ class UserService {
     public static function SendForm($data) {
 
         $mysqli = Database::Connect();
-        $status = (new SendFormHandler)->handle($mysqli);
+        
+        $status = (new SendFormHandler)->handle($data, $mysqli);
         $mysqli->close();
 
         return $status;

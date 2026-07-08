@@ -3,20 +3,27 @@
 // Dependências
 require_once __DIR__ . '/../../bootstrap.php';
 
-Database::Connect();
-exit;
-
 // Pegando as informações enviadas
 $data = json_decode(file_get_contents('php://input'), true);
+$data["route"] = "get-data";
+
+
+if(!isset($data["route"])){
+    die("Rota não selecionada.");
+}
 
 switch ($data['route']) {
 
-    case 'send-form':
-        UserService::SendForm($data);
+    case "send-form":
+        echo UserService::SendForm($data);
+        break;
+
+    case "get-data":
+        echo DataService::GetData($data);
         break;
 
     default:
-        echo "Rota não existente";
+        die("Rota não encontrada.");
         break;
         
 }
