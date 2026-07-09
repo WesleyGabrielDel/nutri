@@ -103,9 +103,9 @@
 
         <div class="left-side">
             <div class="img-container">
-                <img src="frontend/static/img/ycircle.png" class="ycircle">
-                <img src="frontend/static/img/rcircle.png" class="rcircle">
-                <img src="frontend/static/img/login.png" class="imagem">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\ycircle.png" class="ycircle">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\rcircle.png" class="rcircle">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\escola.png" class="imagem">
             </div>
         </div>
 
@@ -159,9 +159,9 @@
 <div class="left-side">
 
     <div class="img-container">
-        <img src="frontend/static/img/ycircle.png" class="ycircle">
-        <img src="frontend/static/img/rcircle.png" class="rcircle">
-        <img src="frontend/static/img/prato.png" class="imagem">
+        <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\ycircle.png" class="ycircle">
+        <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\rcircle.png" class="rcircle">
+        <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\prato.png" class="imagem">
     </div>
 
 </div>
@@ -213,9 +213,9 @@
 
         <div class="left-side">
             <div class="img-container">
-                <img src="frontend/static/img/ycircle.png" class="ycircle">
-                <img src="frontend/static/img/rcircle.png" class="rcircle">
-                <img src="frontend/static/img/login.png" class="imagem">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\ycircle.png" class="ycircle">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\rcircle.png" class="rcircle">
+                <img src="C:\xampp\htdocs\nutri-main\nutri-main\doc\images\escola.png" class="imagem">
             </div>
         </div>
 
