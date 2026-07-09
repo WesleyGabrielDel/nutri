@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="form.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <script src="/public/static/js/form.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet"
   href="<link rel="stylesheet" href="/public/static/css/form.css">">
