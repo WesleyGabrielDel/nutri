@@ -13,7 +13,7 @@ class Env {
             "DBPASSWORD",
             "DBHOST"
         ];
-        
+
         $fields = [];
         $envPath = __DIR__ . '/../.env';
 
