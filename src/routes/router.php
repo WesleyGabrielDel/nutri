@@ -7,7 +7,6 @@ require_once __DIR__ . '/../../bootstrap.php';
 $data = json_decode(file_get_contents('php://input'), true);
 $data["route"] = "get-data";
 
-
 if(!isset($data["route"])){
     die("Rota não selecionada.");
 }
@@ -27,3 +26,4 @@ switch ($data['route']) {
         break;
         
 }
+

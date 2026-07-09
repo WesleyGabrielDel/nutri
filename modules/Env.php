@@ -24,13 +24,16 @@ class Env {
 
             foreach ($lines as $line) {
                 if (strpos(trim($line), '#') === 0) continue;
-
+                
                 if (strpos($line, '=') !== false) {
+
                     list($key, $value) = explode('=', $line, 2);
+
                     if (trim($key) === $field) {
                         $valorEncontrado = trim($value, " \t\n\r\0\x0B\"'");
                         break;
                     }
+
                 }
                 
             }
