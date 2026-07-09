@@ -5,9 +5,12 @@ const entrarAluno = document.getElementById("entrar-aluno");
 const entrarAdmin = document.getElementById("entrar-admin");
 const allSections = document.querySelectorAll("section");
 let allBack = document.querySelectorAll(".voltar");
-const BaseUrl = "http://localhost/NutriFlow/";
+const BaseUrl = "http://localhost/nutri/";
 const adminCadastro = document.getElementById("admin-cadastro")
 const alunoCadastro = document.getElementById("admin-cadastro")
+
+const luz = document.querySelector(".luz");
+const card = document.querySelector("#entrar-aluno", "#entrar-admin");
 
 document.addEventListener("DOMContentLoaded", () => {
     allBack = document.querySelectorAll(".voltar");
@@ -22,8 +25,8 @@ function SetState(allSections, state) {
             element.style.display = "block";
             oldState = currentState;
             currentState = state;
-        } 
-        
+        }
+
         else {
             element.style.display = "none";
         }
@@ -31,15 +34,15 @@ function SetState(allSections, state) {
 }
 
 function setListeners(loginForms) {
-    entrarAluno.addEventListener("click", function() {
+    entrarAluno.addEventListener("click", function () {
         SetState(allSections, "login-aluno");
     });
 
-    entrarAdmin.addEventListener("click", function() {
+    entrarAdmin.addEventListener("click", function () {
         SetState(allSections, "login-admin");
     });
 
-    adminCadastro.addEventListener("click", function (){
+    adminCadastro.addEventListener("click", function () {
         SetState(allSections, "cadastro-admin");
     });
 
@@ -56,29 +59,29 @@ function setListeners(loginForms) {
     loginForms.forEach(form => {
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
-            
-            if(currentState === "cadastro-admin"){
+
+            if (currentState === "cadastro-admin") {
                 const formData = new FormData(form);
                 const email = formData.get("email");
                 const nome = formData.get("nome");
                 const senha = formData.get("senha");
                 const cnpj = formData.get("cnpj");
-        
+
                 let res = null;
 
                 res = await request(BaseUrl + "backend/auth/admin-auth.php", "POST", {
-                    body: JSON.stringify({ 
-                        email: email, 
-                        senha: senha, 
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha,
                         cnpj: cnpj,
                         nome: nome
                     })
                 });
 
                 console.log("Resposta Cadastro Admin:", res);
-            } 
+            }
 
-            else if(currentState === "cadastro-aluno"){
+            else if (currentState === "cadastro-aluno") {
                 const formData = new FormData(form);
                 const email = formData.get("email");
                 const nome = formData.get("nome");
@@ -86,16 +89,16 @@ function setListeners(loginForms) {
 
                 let res = null;
                 res = await request(BaseUrl + "backend/user.php", "POST", {
-                    body: JSON.stringify({ 
-                        email: email, 
-                        senha: senha, 
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha,
                         cnpj: cnpj,
-                            nome: nome
+                        nome: nome
                     })
                 });
 
                 console.log("Resposta Cadastro Aluno:", res);
-            }  
+            }
 
 
         });
@@ -132,3 +135,8 @@ async function request(url, method = "GET", options = {}) {
         return { success: false, message: `Erro de conexão com o servidor.\n${error}` };
     }
 }
+
+card.addEventListener("mousemove", (e)=> {
+    mouseX = e.mouseX;
+    mouseY = e.mouseY;
+})
