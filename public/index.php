@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriFlow</title>
 
-    <link rel="stylesheet" href="/nutri/public/static/css/index.css">
-    <script src="/nutri/public/static/js/index.js" defer></script>
+    <link rel="stylesheet" href="/public/static/css/index.css">
+    <script src="/public/static/js/index.js" defer></script>
 </head>
 <body>
 
@@ -42,39 +42,54 @@
 
     <!-- LOGIN ALUNO -->
 
-    <section class="login-aluno">
-        <div class="log">
+    <section id="login-aluno">
 
-            <form action="" id="form-login">
+        <div class="left-side">
+            <div class="img-container">
+                <img src="frontend/static/img/ycircle.png" class="ycircle">
+                <img src="frontend/static/img/rcircle.png" class="rcircle">
+                <img src="frontend/static/img/prato.png" class="imagem">
+            </div>
+        </div>
 
-                <h1>Login</h1>
+        <div class="divider"></div>
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Insira seu email">
+        <div class="right-side">
 
-                <input
-                    type="password"
-                    name="senha"
-                    placeholder="Insira sua senha">
+            <div class="log">
 
-                <button id="submit-login">
-                    Entrar
-                </button>
+                <form action="" id="form-login">
 
-                <p>
-                    Não tem uma conta?
-                    <a class="c" id="aluno-cadastro">
-                        Cadastre-se aqui
+                    <h1>Login</h1>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Insira seu email">
+
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Insira sua senha">
+
+                    <button id="submit-login">
+                        Entrar
+                    </button>
+
+                    <p>
+                        Não tem uma conta?
+                        <a class="c" id="aluno-cadastro">
+                            Cadastre-se aqui
+                        </a>
+                    </p>
+
+                    <a class="voltar">
+                        Voltar
                     </a>
-                </p>
 
-                <a class="voltar">
-                    Voltar
-                </a>
+                </form>
 
-            </form>
+            </div>
 
         </div>
 
@@ -82,40 +97,54 @@
 
     <!-- LOGIN ADMIN -->
 
-    <section class="login-admin">
+    <section id="login-admin">
 
-        <div class="log-adm">
+        <div class="left-side">
+            <div class="img-container">
+                <img src="frontend/static/img/ycircle.png" class="ycircle">
+                <img src="frontend/static/img/rcircle.png" class="rcircle">
+                <img src="frontend/static/img/login.png" class="imagem">
+            </div>
+        </div>
 
-            <form action="" id="form-login">
+        <div class="divider"></div>
 
-                <h1>Login</h1>
+        <div class="right-side">
 
-                <input
-                    type="text"
-                    name="cnpj"
-                    placeholder="Insira o CNPJ da instituição">
+            <div class="log-adm">
 
-                <input
-                    type="password"
-                    name="senha"
-                    placeholder="Insira a senha da instituição">
+                <form action="" id="form-login">
 
-                <button id="submit-login">
-                    Entrar
-                </button>
+                    <h1>Login</h1>
 
-                <p>
-                    Não cadastrou sua instituição?
-                    <a class="c" id="admin-cadastro">
-                        Cadastre aqui
+                    <input
+                        type="text"
+                        name="cnpj"
+                        placeholder="Insira o CNPJ da instituição">
+
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Insira a senha da instituição">
+
+                    <button id="submit-login">
+                        Entrar
+                    </button>
+
+                    <p>
+                        Não cadastrou sua instituição?
+                        <a class="c" id="admin-cadastro">
+                            Cadastre aqui
+                        </a>
+                    </p>
+
+                    <a class="voltar">
+                        Voltar
                     </a>
-                </p>
 
-                <a class="voltar">
-                    Voltar
-                </a>
+                </form>
 
-            </form>
+            </div>
 
         </div>
 
@@ -123,37 +152,54 @@
 
         <!-- CADASTRO ALUNO -->
 
-    <section class="cadastro-aluno">
-        <div class="log">
+    <section id="cadastro-aluno">
 
-            <form action="" id="form-login">
+<div class="left-side">
 
-                <h1>Cadastro</h1>
+    <div class="img-container">
+        <img src="frontend/static/img/ycircle.png" class="ycircle">
+        <img src="frontend/static/img/rcircle.png" class="rcircle">
+        <img src="frontend/static/img/prato.png" class="imagem">
+    </div>
 
-                <input
-                    type="text"
-                    name="nome"
-                    placeholder="Insira seu nome">
+</div>
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Insira seu email">
+        <div class="divider"></div>
 
-                <input
-                    type="password"
-                    name="senha"
-                    placeholder="Insira sua senha">
+        <div class="right-side">
 
-                <button id="submit-login">
-                    Cadastrar
-                </button>
+            <div class="log">
 
-                <a class="voltar">
-                    Voltar
-                </a>
+                <form action="" id="form-login">
 
-            </form>
+                    <h1>Cadastro</h1>
+
+                    <input
+                        type="text"
+                        name="nome"
+                        placeholder="Insira seu nome">
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Insira seu email">
+
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Insira sua senha">
+
+                    <button id="submit-login">
+                        Cadastrar
+                    </button>
+
+                    <a class="voltar">
+                        Voltar
+                    </a>
+
+                </form>
+
+            </div>
 
         </div>
 
@@ -161,37 +207,52 @@
 
     <!-- CADASTRO ADMIN -->
 
-    <section class="cadastro-admin">
-        <div class="log-adm">
+    <section id="cadastro-admin">
 
-            <form action="" id="form-login">
+        <div class="left-side">
+            <div class="img-container">
+                <img src="frontend/static/img/ycircle.png" class="ycircle">
+                <img src="frontend/static/img/rcircle.png" class="rcircle">
+                <img src="frontend/static/img/login.png" class="imagem">
+            </div>
+        </div>
 
-                <h1 class="h">Cadastro</h1>
+        <div class="divider"></div>
 
-                <input
-                    type="text"
-                    name="nome"
-                    placeholder="Insira o Nome da Instituição">
+        <div class="right-side">
 
-                <input
-                    type="text"
-                    name="cnpj"
-                    placeholder="Insira o CNPJ da instituição">
+            <div class="log-adm">
 
-                <input
-                    type="password"
-                    name="senha"
-                    placeholder="Insira sua senha">
+                <form action="" id="form-login">
 
-                <button id="submit-login">
-                    Cadastrar
-                </button>
+                    <h1 class="h">Cadastro</h1>
 
-                <a class="voltar">
-                    Voltar
-                </a>
+                    <input
+                        type="text"
+                        name="nome"
+                        placeholder="Insira o Nome da Instituição">
 
-            </form>
+                    <input
+                        type="text"
+                        name="cnpj"
+                        placeholder="Insira o CNPJ da instituição">
+
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Insira sua senha">
+
+                    <button id="submit-login">
+                        Cadastrar
+                    </button>
+
+                    <a class="voltar">
+                        Voltar
+                    </a>
+
+                </form>
+
+            </div>
 
         </div>
 

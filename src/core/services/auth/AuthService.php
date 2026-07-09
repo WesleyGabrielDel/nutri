@@ -31,7 +31,7 @@ class AuthService {
             $email = $data["email"];
             $password = $data["password"];
             $cpf = $data["cpf"];
-
+            
             $status = (new AdminLoginHandler)->handle($cpf, $email, $password, $mysqli);
             return $status;
 

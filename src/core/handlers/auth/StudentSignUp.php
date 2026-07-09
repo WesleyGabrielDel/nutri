@@ -1,6 +1,6 @@
 <?php 
 
-class StudentSignUpHandler() {
+class StudentSignUpHandler {
 
     public function handle($email, $password, $name, $mysqli){
 
@@ -10,7 +10,7 @@ class StudentSignUpHandler() {
             die("Usuário já cadastrado.");
         }
 
-        Database::request("INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)", [$name, $email, $password], $mysqli);
+        Database::request("INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)", [$name, $email, $password_hash], $mysqli);
 
     }
 
