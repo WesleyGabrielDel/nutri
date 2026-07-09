@@ -21,9 +21,13 @@ switch ($data['route']) {
         echo DataService::GetData($data);
         break;
 
+    case "login":
+        echo AuthService::Login($data);
+        break;
+
     default:
         die("Rota não encontrada.");
         break;
-        
+
 }
 
