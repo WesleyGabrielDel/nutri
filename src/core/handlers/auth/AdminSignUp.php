@@ -1,8 +1,8 @@
 <?php 
 
-class AdminSignUpHandler() {
+class AdminSignUpHandler {
 
-    public function handle($email, $password, $name, $mysqli){
+    public function handle($cpf, $email, $password, $name, $mysqli){
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -10,7 +10,7 @@ class AdminSignUpHandler() {
             die("Usuário já cadastrado.");
         }
 
-        Database::request("INSERT INTO users (nome, email, senha) VALUES (?, ?, ?, ?)", [$name, $email, $password, $cpf], $mysqli);
+        Database::request("INSERT INTO users (nome, email, senha, cpf) VALUES (?, ?, ?, ?)", [$name, $email, $password_hash, $cpf], $mysqli);
 
     }
 
