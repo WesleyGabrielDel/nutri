@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriFlow</title>
 
-    <link rel="stylesheet" href="/public/static/css/index.css">
+    <link rel="stylesheet" href="/nutri/public/static/css/index.css">
     <script src="/public/static/js/index.js" defer></script>
 </head>
 <body>
@@ -15,26 +15,28 @@
             <h1 class="n">NutriFlow</h1>
 
             <div id="escolha-row">
-
-                <button id="entrar-aluno">
+                <div id="entrar-aluno">
                     <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
                         <path d="M12 3L1 9L12 15L23 9L12 3Z" stroke="currentColor" stroke-width="2"/>
                         <path d="M5 12V16C5 18.761 8.134 21 12 21C15.866 21 19 18.761 19 16V12" stroke="currentColor" stroke-width="2"/>
                     </svg>
 
-                    <p>Entrar como aluno</p>
-                </button>
+                    <h2>Entrar como aluno</h2>
 
-                <button id="entrar-admin">
+                    <div class="luz"></div>
+                </div>
+                
+                <div id="entrar-admin">
                     <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
                         <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" stroke="currentColor" stroke-width="2"/>
                         <path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-width="2"/>
                         <path d="M19 14V18" stroke="currentColor" stroke-width="2"/>
                         <path d="M17 16H21" stroke="currentColor" stroke-width="2"/>
                     </svg>
-
-                    <p>Entrar como instituição</p>
-                </button>
+                    
+                    <h2>Entrar como instituição</h2>
+                    <div class="luz"></div>
+                </div>
 
             </div>
         </div>
