@@ -8,7 +8,7 @@
 
     <title>NutriFlow | Lista</title>
 
-    <link rel="stylesheet" href="lista.css">
+    <link rel="stylesheet" href="/nutri/public/static/css/lista.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
