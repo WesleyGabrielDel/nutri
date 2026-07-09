@@ -1,5 +1,5 @@
 let currentState = "escolha";
-let oldState = "escolha";
+let stateHistory = ["escolha"];
 
 const entrarAluno = document.getElementById("entrar-aluno");
 const entrarAdmin = document.getElementById("entrar-admin");
@@ -7,7 +7,7 @@ const allSections = document.querySelectorAll("section");
 let allBack = document.querySelectorAll(".voltar");
 const BaseUrl = "http://localhost/nutri/";
 const adminCadastro = document.getElementById("admin-cadastro")
-const alunoCadastro = document.getElementById("admin-cadastro")
+const alunoCadastro = document.getElementById("aluno-cadastro")
 
 const luz = document.querySelector(".luz");
 const card = document.querySelector("#entrar-aluno", "#entrar-admin");
@@ -21,13 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function SetState(allSections, state) {
     allSections.forEach(element => {
-        if (element.id === state) {
-            element.style.display = "block";
-            oldState = currentState;
+        if (element.id === state || element.classList.contains(state)) {
+            element.style.display = "flex";
             currentState = state;
-        }
-
-        else {
+        } else {
             element.style.display = "none";
         }
     });
@@ -35,24 +32,31 @@ function SetState(allSections, state) {
 
 function setListeners(loginForms) {
     entrarAluno.addEventListener("click", function () {
+        stateHistory.push("login-aluno");
         SetState(allSections, "login-aluno");
     });
 
     entrarAdmin.addEventListener("click", function () {
+        stateHistory.push("login-admin");
         SetState(allSections, "login-admin");
     });
 
     adminCadastro.addEventListener("click", function () {
+        stateHistory.push("cadastro-admin");
         SetState(allSections, "cadastro-admin");
     });
 
     alunoCadastro.addEventListener("click", function () {
-        SetState(allSections, "cadastro-aluno")
+        stateHistory.push("cadastro-aluno");
+        SetState(allSections, "cadastro-aluno");
     })
 
     allBack.forEach(a => {
         a.addEventListener("click", function () {
-            SetState(allSections, oldState);
+            if (stateHistory.length > 1) {
+                stateHistory.pop();
+                SetState(allSections, stateHistory[stateHistory.length - 1]);
+            }
         })
     });
 
