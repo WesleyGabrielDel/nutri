@@ -2,103 +2,251 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NutriFlow | Refeição</title>
-  <link rel="stylesheet" href="form.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <script src="/public/static/js/form.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-  href="<link rel="stylesheet" href="/public/static/css/form.css">">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriFlow | Refeição</title>
+
+    <link rel="stylesheet" href="static/css/form.css">
+
+    <script src="static/js/form.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 
 <body>
 
-  <header class="navbar">
-    <div class="logo">
-      <i class="fa-solid fa-leaf"></i>
-      <span>NutriFlow</span>
-    </div>
-    <nav>
-      <a href="#">Cardápio</a>
-      <a href="#">Histórico</a>
-      <a href="#">Configurações</a>
-    </nav>
-  </header>
+    <header class="navbar">
 
-  <main class="main-content">
-    <section class="intro">
-      <h1>Organize sua alimentação</h1>
-      <p>Sua rotina alimentar simples, prática e inteligente.</p>
-    </section>
+        <div class="logo">
+            <i class="fa-solid fa-leaf"></i>
+            <span>NutriFlow</span>
+        </div>
+        
+    </header>
 
-    <div class="layout">
-      <div class="side-image left">
-        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Comida saudável">
-      </div>
+    <main class="main-content">
 
-      <section class="meal-card">
-        <div class="date">
-          <i class="fa-solid fa-calendar-days"></i>
-          Segunda-feira, 08 de Julho
+        <section class="intro">
+
+            <span class="badge">
+                Alimentação Inteligente
+            </span>
+
+            <h1>
+                Organize sua alimentação
+            </h1>
+
+            <p>
+                Informe sua presença na refeição de forma rápida, prática e ajude a reduzir o desperdício de alimentos.
+            </p>
+
+        </section>
+
+        <section class="layout">
+
+            <aside class="side-image left">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png"
+                    alt="Comida saudável">
+
+            </aside>
+
+            <section class="meal-card">
+
+                <div class="date">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <span>
+                        Segunda-feira, 08 de Julho
+                    </span>
+
+                </div>
+
+                <div class="title">
+
+                    <h2>
+                        Você irá comer hoje?
+                    </h2>
+
+                    <p>
+                        Escolha uma das opções abaixo para registrar sua refeição.
+                    </p>
+
+                </div>
+
+                <form class="meal-form">
+
+                    <label class="option">
+
+                        <input
+                            type="radio"
+                            name="refeicao"
+                            value="sim"
+                            checked>
+
+                        <div class="icon green">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+
+                        <div class="text">
+
+                            <strong>
+                                Sim, vou comer
+                            </strong>
+
+                            <span>
+                                Reservar minha refeição para hoje.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                    <label class="option">
+
+                        <input
+                            type="radio"
+                            name="refeicao"
+                            value="nao">
+
+                        <div class="icon red">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+
+                        <div class="text">
+
+                            <strong>
+                                Não vou comer
+                            </strong>
+
+                            <span>
+                                Cancelar minha refeição de hoje.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                    <label class="option">
+
+                        <input
+                            type="radio"
+                            name="refeicao"
+                            value="lanche">
+
+                        <div class="icon orange">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+
+                        <div class="text">
+
+                            <strong>
+                                Vou trazer lanche
+                            </strong>
+
+                            <span>
+                                Não utilizarei a refeição da cantina.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                    <button type="submit" class="confirm-btn">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Confirmar escolha
+
+                    </button>
+
+                </form>
+
+            </section>
+
+            <aside class="side-image right">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png"
+                    alt="Frutas frescas">
+
+            </aside>
+
+        </section>
+
+        <section class="info-cards">
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-seedling"></i>
+
+                <h3>Sustentabilidade</h3>
+
+                <p>
+                    Sua confirmação ajuda a reduzir o desperdício de alimentos e melhora o planejamento da cozinha.
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h3>Rapidez</h3>
+
+                <p>
+                    Leva menos de um minuto para registrar sua refeição.
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h3>Organização</h3>
+
+                <p>
+                    A administração consegue prever melhor a quantidade de refeições necessárias.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+
+                <i class="fa-solid fa-leaf"></i>
+
+                <span>NutriFlow</span>
+
+            </div>
+
+            <p>
+                Alimentação inteligente • Reduzindo desperdícios e facilitando a organização das refeições.
+            </p>
+
+            <small>
+                © 2026 NutriFlow. Todos os direitos reservados.
+            </small>
+
         </div>
 
-        <h2>Você irá comer hoje?</h2>
-        <p>Escolha sua opção de refeição abaixo:</p>
-
-        <form>
-          <label class="option">
-            <input type="radio" name="refeicao" checked>
-            <div class="icon green"><i class="fa-solid fa-bowl-food"></i></div>
-            <div>
-              <strong>Sim, vou comer</strong>
-              <span>Reservar minha refeição para hoje.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="radio" name="refeicao">
-            <div class="icon red"><i class="fa-solid fa-ban"></i></div>
-            <div>
-              <strong>Não vou comer</strong>
-              <span>Cancelar minha refeição de hoje.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="radio" name="refeicao">
-            <div class="icon orange"><i class="fa-solid fa-cookie-bite"></i></div>
-            <div>
-              <strong>Vou trazer lanche</strong>
-              <span>Não utilizarei a refeição da cantina.</span>
-            </div>
-          </label>
-
-          <label class="remember">
-            <input type="checkbox"> Repetir essa escolha automaticamente
-          </label>
-
-          <button type="submit">
-            <i class="fa-solid fa-check"></i> Confirmar escolha
-          </button>
-        </form>
-
-        <a href="#" class="menu">
-          <i class="fa-solid fa-book-open"></i> Ver cardápio do dia
-        </a>
-      </section>
-
-      <div class="side-image right">
-        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png" alt="Frutas frescas">
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <p>© 2026 NutriFlow - Alimentação inteligente</p>
-  </footer>
+    </footer>
 
 </body>
+
 </html>

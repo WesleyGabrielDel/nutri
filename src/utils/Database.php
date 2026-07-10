@@ -15,16 +15,16 @@ class Database {
 
     public static function request($sql, $params, $mysqli) {
         $stmt = $mysqli->prepare($sql);
-    
+
         if (!$stmt) {
             return false;
         }
-    
+
         if ($params !== null && ($params === 0 || $params === false || !empty($params))) {
             $params = is_array($params) ? $params : [$params];
             $types = '';
             $values = [];
-    
+
             foreach ($params as $param) {
                 if (is_bool($param)) {
                     $types .= 'i';
@@ -40,29 +40,35 @@ class Database {
                     $values[] = $param;
                 }
             }
+
             $stmt->bind_param($types, ...$values);
         }
-    
+
         if (!$stmt->execute()) {
             $stmt->close();
             return false;
         }
-    
+
         $result = $stmt->get_result();
-    
+
         if ($result) {
             $data = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
             return $data;
         }
-    
+
         $affected = $stmt->affected_rows;
+        $insertId = $mysqli->insert_id;
+
         $stmt->close();
-        
+
+        // Se for um INSERT, retorna o ID do registro inserido
+        if (stripos(ltrim($sql), "INSERT") === 0) {
+            return $insertId;
+        }
+
+        // UPDATE, DELETE, etc.
         return $affected;
     }
-    
-    
-    
 
 }

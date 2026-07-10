@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriFlow | Dashboard</title>
+
+    <link rel="stylesheet" href="./static/css/dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="./static/js/dashboard.js" defer></script>
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <i class="fa-solid fa-leaf"></i>
+            <span>NutriFlow</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cardápio</a>
+            <a href="#">Histórico</a>
+            <a href="#">Configurações</a>
+        </nav>
+
+    </header>
+
+    <main class="main-content">
+
+        <section class="intro">
+
+            <span class="badge">
+                Painel Administrativo
+            </span>
+
+            <h1>
+                Dashboard Operacional
+            </h1>
+
+            <p>
+                Acompanhe em tempo real as confirmações, custos previstos e quantidade de refeições necessárias para o
+                turno selecionado.
+            </p>
+
+        </section>
+
+        <section class="dashboard-top">
+
+            <div class="dashboard-info">
+
+                <div class="info-box">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <div>
+
+                        <span>Data</span>
+
+                        <strong>
+                            09 de Julho de 2026
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="info-box">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <div>
+
+                        <span>Turno</span>
+
+                        <strong>
+                            Manhã
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="dashboard-metrics">
+
+            <article class="metric-card">
+
+                <div class="metric-icon blue">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+
+                <span>
+                    Refeições necessárias
+                </span>
+
+                <strong id="totalMeals">
+                    152
+                </strong>
+
+                <small>
+                    Quantidade prevista para o turno.
+                </small>
+
+            </article>
+
+            <article class="metric-card">
+
+                <div class="metric-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <span>
+                    Confirmados
+                </span>
+
+                <strong id="confirmedMeals">
+                    0
+                </strong>
+
+                <small>
+                    Alunos que confirmaram presença.
+                </small>
+
+            </article>
+
+            <article class="metric-card">
+
+                <div class="metric-icon red">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+
+                <span>
+                    Cancelados
+                </span>
+
+                <strong id="cancelledMeals">
+                    0
+                </strong>
+
+                <small>
+                    Alunos que cancelaram a refeição.
+                </small>
+
+            </article>
+
+            <article class="metric-card">
+
+                <div class="metric-icon orange">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                </div>
+
+                <span>
+                    Previsão de alimento
+                </span>
+
+                <strong id="foodForecast">
+                    0 kg
+                </strong>
+
+                <small>
+                    Quantidade estimada de insumos.
+                </small>
+
+            </article>
+
+            <article class="metric-card highlight">
+
+                <div class="metric-icon money">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+
+                <span>
+                    Custo previsto
+                </span>
+
+                <strong id="estimatedCost">
+                    R$ 0,00
+                </strong>
+
+                <small>
+                    Estimativa total do turno.
+                </small>
+
+            </article>
+
+        </section>
+
+                <section class="dashboard-content">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>Resumo de presença</h2>
+
+                        <p>
+                            Distribuição das confirmações registradas para o turno.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                </div>
+
+                <div class="chart-area">
+                    <canvas id="presenceChart"></canvas>
+                </div>
+
+            </div>
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>Demanda de alimentos</h2>
+
+                        <p>
+                            Comparação entre refeições previstas e quantidade de insumos.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+                <div class="chart-area">
+                    <canvas id="demandChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="dashboard-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-header">
+
+                    <h2>Situação da operação</h2>
+
+                    <span>Atualizado em tempo real</span>
+
+                </div>
+
+                <div class="summary-grid">
+
+                    <div class="summary-item">
+
+                        <i class="fa-solid fa-wallet"></i>
+
+                        <div>
+
+                            <span>Receita prevista</span>
+
+                            <strong>R$ 0,00</strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="summary-item">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                        <div>
+
+                            <span>Produtividade</span>
+
+                            <strong>0%</strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="summary-item">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <div>
+
+                            <span>Taxa de ocupação</span>
+
+                            <strong>0%</strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="summary-item">
+
+                        <i class="fa-solid fa-seedling"></i>
+
+                        <div>
+
+                            <span>Eficiência</span>
+
+                            <strong>Excelente</strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
