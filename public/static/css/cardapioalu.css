@@ -105,11 +105,13 @@
 /* Imagem do prato */
 .menu-image {
     width: 100%;
-    max-height: 140px;
+    height: auto;
+    min-height: 140px;
     object-fit: cover;
     border-radius: 10px;
     border: 1px solid var(--neutral-line);
     margin-bottom: 16px;
+    display: block;
 }
 
 /* Descrição */

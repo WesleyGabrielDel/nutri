@@ -42,8 +42,6 @@
         <nav class="nav-links">
             <a href="dashboard.php" class="active">Dashboard</a>
             <a href="cardapioadm.php">Cardápio</a>
-            <a href="#">Histórico</a>
-            <a href="#">Configurações</a>
         </nav>
 
         <div class="user-menu">

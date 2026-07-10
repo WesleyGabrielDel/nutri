@@ -139,9 +139,9 @@
             <span>NutriFlow</span>
         </div>
 
-        <a href="form.php" class="btn-voltar">
+        <a href="home.php" class="btn-voltar">
             <i class="fa-solid fa-arrow-left"></i>
-            Voltar ao Formulário
+            Voltar
         </a>
 
     </header>

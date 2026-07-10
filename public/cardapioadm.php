@@ -38,21 +38,6 @@ $UserName = SessionManager::getCurrentUserName();
             <p>Cadastre as refeições que serão exibidas para os alunos.</p>
         </section>
 
-        <section class="config">
-            <div>
-                <label>Semana</label>
-                <input type="week">
-            </div>
-
-            <div>
-                <label>Turno</label>
-                <select>
-                    <option>Manhã</option>
-                    <option>Tarde</option>
-                </select>
-            </div>
-        </section>
-
         <section class="admin-grid">
             <article class="menu-editor" data-day="Segunda-feira">
                 <div class="card-header">
@@ -64,9 +49,11 @@ $UserName = SessionManager::getCurrentUserName();
                 </div>
 
                 <div class="imagem">
-                    <i class="fa-solid fa-image"></i>
-                    <button type="button" class="upload-btn">Adicionar imagem</button>
-                    <input type="file" accept="image/*" class="image-input" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; left:0; top:0;">
+                    <label class="upload-label">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="upload-text">Adicionar imagem</span>
+                        <input type="file" accept="image/*" class="image-input">
+                    </label>
                 </div>
 
                 <label>Título do item</label>
@@ -86,9 +73,11 @@ $UserName = SessionManager::getCurrentUserName();
                 </div>
 
                 <div class="imagem">
-                    <i class="fa-solid fa-image"></i>
-                    <button type="button" class="upload-btn">Adicionar imagem</button>
-                    <input type="file" accept="image/*" class="image-input" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; left:-9999px; top:-9999px;">
+                    <label class="upload-label">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="upload-text">Adicionar imagem</span>
+                        <input type="file" accept="image/*" class="image-input">
+                    </label>
                 </div>
 
                 <label>Título do item</label>
@@ -108,9 +97,11 @@ $UserName = SessionManager::getCurrentUserName();
                 </div>
 
                 <div class="imagem">
-                    <i class="fa-solid fa-image"></i>
-                    <button type="button" class="upload-btn">Adicionar imagem</button>
-                    <input type="file" accept="image/*" class="image-input" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; left:-9999px; top:-9999px;">
+                    <label class="upload-label">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="upload-text">Adicionar imagem</span>
+                        <input type="file" accept="image/*" class="image-input">
+                    </label>
                 </div>
 
                 <label>Título do item</label>
@@ -130,9 +121,11 @@ $UserName = SessionManager::getCurrentUserName();
                 </div>
 
                 <div class="imagem">
-                    <i class="fa-solid fa-image"></i>
-                    <button type="button" class="upload-btn">Adicionar imagem</button>
-                    <input type="file" accept="image/*" class="image-input" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; left:-9999px; top:-9999px;">
+                    <label class="upload-label">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="upload-text">Adicionar imagem</span>
+                        <input type="file" accept="image/*" class="image-input">
+                    </label>
                 </div>
 
                 <label>Título do item</label>
@@ -152,9 +145,11 @@ $UserName = SessionManager::getCurrentUserName();
                 </div>
 
                 <div class="imagem">
-                    <i class="fa-solid fa-image"></i>
-                    <button type="button" class="upload-btn">Adicionar imagem</button>
-                    <input type="file" accept="image/*" class="image-input" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; left:-9999px; top:-9999px;">
+                    <label class="upload-label">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="upload-text">Adicionar imagem</span>
+                        <input type="file" accept="image/*" class="image-input">
+                    </label>
                 </div>
 
                 <label>Título do item</label>

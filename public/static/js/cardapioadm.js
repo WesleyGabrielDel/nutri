@@ -15,22 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const publishButton = document.querySelector('.publish-menu-btn');
 
     blocks.forEach(block => {
-        const button = block.querySelector('.upload-btn');
+        const article = block.closest('.menu-editor');
         const input = block.querySelector('.image-input');
         const icon = block.querySelector('.fa-image');
+        const labelText = block.querySelector('.upload-text');
 
-        if (!button || !input) {
+        if (!input) {
             return;
         }
-
-        const openFileDialog = () => {
-            input.click();
-        };
-
-        button.addEventListener('click', event => {
-            event.preventDefault();
-            openFileDialog();
-        });
 
         input.addEventListener('change', async () => {
             const file = input.files && input.files[0];
@@ -40,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const dataUrl = await readFileAsDataUrl(file);
+                if (article) {
+                    article.dataset.imageData = dataUrl;
+                }
                 block.dataset.imageData = dataUrl;
 
                 let preview = block.querySelector('.image-preview');
@@ -52,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 preview.src = dataUrl;
                 preview.style.maxWidth = '100%';
+                preview.style.height = '100%';
+                preview.style.objectFit = 'cover';
                 preview.style.borderRadius = '12px';
                 preview.style.marginTop = '12px';
 
@@ -59,7 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     icon.style.display = 'none';
                 }
 
-                button.textContent = 'Alterar imagem';
+                if (labelText) {
+                    labelText.textContent = 'Alterar imagem';
+                }
             } catch (error) {
                 console.error(error);
                 window.alert('Erro ao carregar a imagem.');

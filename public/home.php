@@ -56,7 +56,7 @@
 
                 <h1>
                     Menos desperdício.
-                    <span>Mais eficiência.</span>
+                    <span>Mais eficiente.</span>
                 </h1>
 
                 <p>
