@@ -99,7 +99,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `turno` varchar(20) DEFAULT NULL,
   `senha` varchar(100) NOT NULL,
-  `cpf` varchar(11) DEFAULT NULL
+  `cpf` varchar(14) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
