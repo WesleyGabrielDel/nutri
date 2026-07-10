@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="static/css/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-        <script src="./static/js/index.js" defer></script>
+        <script src="./static/js/index.js" type="module" defer></script>
     </head>
     <body>
 
@@ -16,11 +16,6 @@
                 <i class="fa-solid fa-leaf"></i>
                 <span>NutriFlow</span>
             </div>
-            <nav class="nav-links">
-                <a href="#escolha">Início</a>
-                <a href="#login-aluno">Aluno</a>
-                <a href="#login-admin">Instituição</a>
-            </nav>
         </header>
 
         <section id="escolha">
@@ -179,6 +174,11 @@
                 <form action="" id="form-login">
 
                     <h1>Login</h1>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Insira o email da instituição">
 
                     <input
                         type="text"
@@ -346,6 +346,11 @@
                         type="text"
                         name="name"
                         placeholder="Insira o Nome da Instituição">
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Insira o email da instituição">
 
                     <input
                         type="text"

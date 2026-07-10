@@ -14,6 +14,10 @@ class AdminSignUpHandler {
 
         $user_id = Database::request("INSERT INTO users (nome, email, senha, cpf) VALUES (?, ?, ?, ?)", [$name, $email, $password_hash, $cpf], $mysqli);
 
+        if(isset($_COOKIE["auth_token"])) {
+            SessionManager::clearToken();
+        }
+
         $token = AuthToken::generate();
         AuthToken::bindToken($user_id, $token, $mysqli);
         AuthToken::setNavigatorToken($token, $mysqli);

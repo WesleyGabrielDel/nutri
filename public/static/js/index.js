@@ -1,5 +1,36 @@
+import { request, API_BASE_URL, showToast } from "./lib/lib.js";
+
 let currentState = "escolha";
 let stateHistory = ["escolha"];
+
+function setupUserMenu() {
+    const userMenu = document.querySelector('.user-menu');
+    const userTrigger = document.querySelector('.user-trigger');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (!userMenu || !userTrigger || !logoutBtn) {
+        return;
+    }
+
+    userTrigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        userMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!userMenu.contains(event.target)) {
+            userMenu.classList.remove('open');
+        }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+        await request(API_BASE_URL, 'POST', {
+            body: JSON.stringify({ route: 'logout' })
+        });
+
+        window.location.reload();
+    });
+}
 
 const entrarAluno = document.getElementById("entrar-aluno");
 const entrarAdmin = document.getElementById("entrar-admin");
@@ -13,6 +44,7 @@ const luz = document.querySelector(".luz");
 const card = document.querySelector("#entrar-aluno", "#entrar-admin");
 
 document.addEventListener("DOMContentLoaded", () => {
+    setupUserMenu();
     allBack = document.querySelectorAll(".voltar");
     const loginForms = document.querySelectorAll("form");
     setListeners(loginForms);
@@ -28,6 +60,11 @@ function SetState(allSections, state) {
             element.style.display = "none";
         }
     });
+}
+
+function redirectAfterAuth(type) {
+    const target = type === "student" ? "form.php" : "dashboard.php";
+    window.location.href = target;
 }
 
 function setListeners(loginForms) {
@@ -64,80 +101,48 @@ function setListeners(loginForms) {
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
 
+            const formData = new FormData(form);
+            const payload = {
+                route: "login",
+                type: "student",
+                email: formData.get("email"),
+                password: formData.get("password")
+            };
+
+            if (currentState === "login-admin") {
+                payload.route = "login";
+                payload.type = "admin";
+                payload.cpf = formData.get("cpf");
+            }
+
             if (currentState === "cadastro-admin") {
-                const formData = new FormData(form);
-                const email = formData.get("email");
-                const nome = formData.get("nome");
-                const senha = formData.get("senha");
-                const cnpj = formData.get("cnpj");
-
-                let res = null;
-
-                res = await request(BaseUrl + "backend/auth/admin-auth.php", "POST", {
-                    body: JSON.stringify({
-                        email: email,
-                        senha: senha,
-                        cnpj: cnpj,
-                        nome: nome
-                    })
-                });
-
-                console.log("Resposta Cadastro Admin:", res);
+                payload.route = "signup";
+                payload.type = "admin";
+                payload.name = formData.get("name");
+                payload.cpf = formData.get("cpf");
             }
 
-            else if (currentState === "cadastro-aluno") {
-                const formData = new FormData(form);
-                const email = formData.get("email");
-                const nome = formData.get("nome");
-                const senha = formData.get("senha");
-
-                let res = null;
-                res = await request(BaseUrl + "backend/user.php", "POST", {
-                    body: JSON.stringify({
-                        email: email,
-                        senha: senha,
-                        cnpj: cnpj,
-                        nome: nome
-                    })
-                });
-
-                console.log("Resposta Cadastro Aluno:", res);
+            if (currentState === "cadastro-aluno") {
+                payload.route = "signup";
+                payload.type = "student";
+                payload.nome = formData.get("nome");
+                payload.turn = formData.get("turn");
             }
 
+            const res = await request(API_BASE_URL, "POST", {
+                body: JSON.stringify(payload)
+            });
 
+            if (res?.status === "success" || res?.success === true) {
+                const authType = payload.type === "student" ? "student" : "admin";
+                showToast(res?.message || "Autenticação realizada com sucesso!", "success");
+                window.setTimeout(() => redirectAfterAuth(authType), 800);
+                return;
+            }
+
+            showToast(res?.message || "Não foi possível concluir a autenticação.", "error");
         });
     });
-}
-
-async function request(url, method = "GET", options = {}) {
-    try {
-        const headers = {
-            "Content-Type": "application/json",
-            ...(options.headers || {})
-        };
-        const response = await fetch(url, {
-            method,
-            credentials: "include",
-            body: options.body,
-            ...options,
-            headers,
-        });
-
-        let data;
-        const text = await response.text();
-        try {
-            data = JSON.parse(text);
-        } catch {
-            data = `===================================== Erro Interno do Servidor ===================================== ${text}`;
-        }
-
-        if (!response.ok) {
-            return { success: false, message: data?.message || data || "Erro na requisição" };
-        }
-        return data;
-    } catch (error) {
-        return { success: false, message: `Erro de conexão com o servidor.\n${error}` };
-    }
 }
 
 card.addEventListener("mousemove", (e)=> {

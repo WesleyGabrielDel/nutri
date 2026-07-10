@@ -7,47 +7,96 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NutriFlow | Criando o Cardápio</title>
+<title>NutriFlow | Administração do Cardápio</title>
 
-<link rel="stylesheet" href="/public/static/css/cardapioadm.css">
+<link rel="stylesheet" href="static/css/cardapioadm.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
+<?php
+
+    require_once __DIR__ . '/../bootstrap.php';
+    SessionManager::verifyAdmin();
+    $userName = SessionManager::getCurrentUserName();
+
+?>
+
 <body>
 
-<div class="container">
 
-<header>
+<header class="navbar">
 
-<h2>🥗 NutriFlow</h2>
 
-<div class="perfil">
+<div class="logo">
 
-Cardápio
+<i class="fa-solid fa-leaf"></i>
+
+<span>NutriFlow</span>
 
 </div>
 
+
+<a href="homeadm.php" class="btn-voltar">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Voltar
+
+</a>
+
+
 </header>
 
-<main>
 
-<section class="titulo">
 
-<a href="#">← Voltar</a>
+<main class="container">
 
-<h1>Cardápio da Semana</h1>
 
-<p>Cadastre ou altere as refeições da semana.</p>
+
+<section class="intro">
+
+
+<span class="badge">
+
+Área do Administrador
+
+</span>
+
+
+<h1>Gerenciar Cardápio Semanal</h1>
+
+
+<p>
+
+Cadastre as refeições que serão exibidas para os alunos.
+
+</p>
+
 
 </section>
 
+
+
 <section class="config">
+
+
+<div>
+
+<label>Semana</label>
+
+<input type="week">
+
+</div>
+
 
 <div>
 
@@ -63,99 +112,308 @@ Cardápio
 
 </div>
 
-<div>
-
-<label>Semana</label>
-
-<input type="week">
-
-</div>
 
 </section>
 
-<section class="dia">
+
+
+
+
+<section class="admin-grid">
+
+
+
+<article class="menu-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-bowl-food"></i>
+
+</div>
+
 
 <h2>Segunda-feira</h2>
 
-<input type="text" placeholder="Prato principal">
+<span>07/07/2026</span>
 
-<input type="text" placeholder="Acompanhamento">
 
-<input type="text" placeholder="Salada">
+</div>
 
-<input type="text" placeholder="Sobremesa">
 
-</section>
 
-<section class="dia">
+<div class="imagem">
 
-<h2>Terça-feira</h2>
 
-<input type="text" placeholder="Prato principal">
+<i class="fa-solid fa-image"></i>
 
-<input type="text" placeholder="Acompanhamento">
-
-<input type="text" placeholder="Salada">
-
-<input type="text" placeholder="Sobremesa">
-
-</section>
-
-<section class="dia">
-
-<h2>Quarta-feira</h2>
-
-<input type="text" placeholder="Prato principal">
-
-<input type="text" placeholder="Acompanhamento">
-
-<input type="text" placeholder="Salada">
-
-<input type="text" placeholder="Sobremesa">
-
-</section>
-
-<section class="dia">
-
-<h2>Quinta-feira</h2>
-
-<input type="text" placeholder="Prato principal">
-
-<input type="text" placeholder="Acompanhamento">
-
-<input type="text" placeholder="Salada">
-
-<input type="text" placeholder="Sobremesa">
-
-</section>
-
-<section class="dia">
-
-<h2>Sexta-feira</h2>
-
-<input type="text" placeholder="Prato principal">
-
-<input type="text" placeholder="Acompanhamento">
-
-<input type="text" placeholder="Salada">
-
-<input type="text" placeholder="Sobremesa">
-
-</section>
-
-<div class="acoes">
 
 <button>
 
-💾 Salvar Cardápio
+Adicionar imagem
 
 </button>
 
+
 </div>
+
+
+
+<label>Prato principal</label>
+
+<textarea placeholder="Descrição do prato"></textarea>
+
+
+
+
+
+
+</article>
+
+
+
+
+
+<article class="menu-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-utensils"></i>
+
+</div>
+
+
+<h2>Terça-feira</h2>
+
+<span>08/07/2026</span>
+
+
+</div>
+
+
+
+<div class="imagem">
+
+
+<i class="fa-solid fa-image"></i>
+
+
+<button>
+
+Adicionar imagem
+
+</button>
+
+
+</div>
+
+
+
+<label>Prato principal</label>
+
+<textarea placeholder="Descrição do prato"></textarea>
+
+
+
+
+
+
+</article>
+
+
+
+
+
+
+<article class="menu-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-drumstick-bite"></i>
+
+</div>
+
+
+<h2>Quarta-feira</h2>
+
+<span>09/07/2026</span>
+
+
+</div>
+
+
+
+<div class="imagem">
+
+
+<i class="fa-solid fa-image"></i>
+
+
+<button>
+
+Adicionar imagem
+
+</button>
+
+
+</div>
+
+
+
+<label>Prato principal</label>
+
+<textarea placeholder="Descrição do prato"></textarea>
+
+
+
+
+
+
+</article>
+
+
+
+
+
+<article class="menu-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-fire-burner"></i>
+
+</div>
+
+
+<h2>Quinta-feira</h2>
+
+<span>10/07/2026</span>
+
+
+</div>
+
+
+
+<div class="imagem">
+
+
+<i class="fa-solid fa-image"></i>
+
+
+<button>
+
+Adicionar imagem
+
+</button>
+
+
+</div>
+
+
+
+<label>Prato principal</label>
+
+<textarea placeholder="Descrição do prato"></textarea>
+
+
+
+
+
+
+</article>
+
+<article class="menu-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-pizza-slice"></i>
+
+</div>
+
+
+<h2>Sexta-feira</h2>
+
+<span>11/07/2026</span>
+
+
+</div>
+
+
+
+<div class="imagem">
+
+
+<i class="fa-solid fa-image"></i>
+
+
+<button>
+
+Adicionar imagem
+
+</button>
+
+
+</div>
+
+
+
+
+
+<label>Prato principal</label>
+
+<textarea placeholder="Descrição do prato"></textarea>
+
+
+
+
+
+
+</article>
+
+
+
+</section>
+
+
+
+
+
+<div class="publicar">
+
+
+<button>
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+Publicar Cardápio
+
+</button>
+
+
+</div>
+
+
 
 </main>
 
-</div>
 
 </body>
 

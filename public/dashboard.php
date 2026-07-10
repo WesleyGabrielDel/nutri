@@ -18,8 +18,16 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="./static/js/dashboard.js" defer></script>
+    <script src="./static/js/dashboard.js" type="module" defer></script>
 </head>
+
+<?php
+
+    require_once __DIR__ . '/../bootstrap.php';
+    SessionManager::verifyAdmin();
+    $userName = SessionManager::getCurrentUserName();
+
+?>
 
 <body>
 
@@ -36,6 +44,18 @@
             <a href="#">Histórico</a>
             <a href="#">Configurações</a>
         </nav>
+
+        <div class="user-menu">
+            <button class="user-trigger" type="button" aria-expanded="false">
+                <span class="user-name">
+                    <?= htmlspecialchars($userName ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>
+                </span>
+                <i class="fa-solid fa-user-circle"></i>
+            </button>
+            <div class="user-dropdown">
+                <button id="logout-btn" type="button">Sair</button>
+            </div>
+        </div>
 
     </header>
 
@@ -276,21 +296,7 @@
 
                             <span>Receita prevista</span>
 
-                            <strong>R$ 0,00</strong>
-
-                        </div>
-
-                    </div>
-
-                    <div class="summary-item">
-
-                        <i class="fa-solid fa-gauge-high"></i>
-
-                        <div>
-
-                            <span>Produtividade</span>
-
-                            <strong>0%</strong>
+                            <strong id="revenueValue">R$ 0,00</strong>
 
                         </div>
 
@@ -304,21 +310,7 @@
 
                             <span>Taxa de ocupação</span>
 
-                            <strong>0%</strong>
-
-                        </div>
-
-                    </div>
-
-                    <div class="summary-item">
-
-                        <i class="fa-solid fa-seedling"></i>
-
-                        <div>
-
-                            <span>Eficiência</span>
-
-                            <strong>Excelente</strong>
+                            <strong id="occupancyValue">0%</strong>
 
                         </div>
 

@@ -30,4 +30,9 @@ class AuthToken {
         return !empty($result) ? $result[0]['token'] : null;
     }
 
+    public static function getUserIdByToken($token, $mysqli) {
+        $result = Database::request("SELECT user_id FROM tokens WHERE token = ?", $token, $mysqli);
+        return !empty($result) ? $result[0]['user_id'] : null;
+    }
+
 }

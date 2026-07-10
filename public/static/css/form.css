@@ -17,6 +17,55 @@ body {
     color: #e2e8f0;
 }
 
+#nutriflow-toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.nutriflow-toast {
+    min-width: 280px;
+    max-width: 360px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-left: 4px solid #38bdf8;
+    color: #f8fafc;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease, box-shadow 0.28s ease;
+    pointer-events: auto;
+}
+
+.nutriflow-toast.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.nutriflow-toast.success {
+    border-left-color: #22c55e;
+}
+
+.nutriflow-toast.error {
+    border-left-color: #ef4444;
+}
+
+.nutriflow-toast.warning {
+    border-left-color: #f59e0b;
+}
+
+.nutriflow-toast__content {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
 button,
 a {
     cursor: pointer;
@@ -64,6 +113,58 @@ a {
 
 .nav-links a:hover {
     color: #f8fafc;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-trigger {
+    border: none;
+    background: rgba(56,189,248,.16);
+    color: #38bdf8;
+    padding: 8px 14px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-name {
+    color: #f8fafc;
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    background: rgba(15,23,42,.98);
+    border: 1px solid rgba(148,163,184,.16);
+    border-radius: 14px;
+    padding: 8px;
+    display: none;
+    min-width: 120px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.user-menu.open .user-dropdown {
+    display: block;
+}
+
+.user-dropdown button {
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: transparent;
+    color: #f8fafc;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.user-dropdown button:hover {
+    background: rgba(56,189,248,.15);
 }
 
 .main-content {

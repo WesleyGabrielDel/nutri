@@ -1,84 +1,191 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriFlow | Cardápio</title>
 
-<link rel="stylesheet" href="/public/static/css/cardapioalu.css">
+    <link rel="stylesheet" href="static/css/cardapioalu.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<title>Nutriflow | Cardápio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
+
+<?php
+
+    require_once __DIR__ . '/../bootstrap.php';
+    SessionManager::verify();
+    $userName = SessionManager::getCurrentUserName();
+
+?>
+
 <body>
 
-<div class="container">
+    <header class="navbar">
 
-<div class="card">
+        <div class="logo">
+            <i class="fa-solid fa-leaf"></i>
+            <span>NutriFlow</span>
+        </div>
 
-<h1>Cardápio da Semana</h1>
+        <a href="form.php" class="btn-voltar">
+            <i class="fa-solid fa-arrow-left"></i>
+            Voltar ao Formulário
+        </a>
 
-<table>
+    </header>
 
-<thead>
+    <main class="container">
 
-<tr>
+        <section class="intro">
 
-<th>Data</th>
+            <span class="badge">
+                Cardápio Semanal
+            </span>
 
-<th>Refeição</th>
+            <h1>Confira o que será servido</h1>
 
-</tr>
+            <p>
+                Antes de responder ao formulário da cantina, veja as refeições
+                programadas para cada dia da semana.
+            </p>
 
-</thead>
+        </section>
 
-<tbody>
+        <section class="menu-grid">
 
-<tr>
+            <article class="menu-card">
 
-<td>07/07  [PLACEHOLDER]</td>
+                <div class="card-header">
 
-<td>Arroz, Feijão, Frango Grelhado, Salada [PLACEHOLDER]</td>
+                    <div class="icon">
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </div>
 
-</tr>
+                    <div>
+                        <h2>Segunda-feira</h2>
+                        <span>07/07/2026</span>
+                    </div>
 
-<tr>
+                </div>
 
-<td>08/07  [PLACEHOLDER]</td>
+                <img class="menu-image" src="static/imgs/refeitorio.png" alt="Prato do dia">
 
-<td>Macarrão ao molho branco  [PLACEHOLDER]</td>
+                <h3>Descrição</h3>
+                <p>
+                    Frango assado com batatas, acompanhado de arroz e salada.
+                </p>
 
-</tr>
+            </article>
 
-<tr>
+            <article class="menu-card">
 
-<td>09/07  [PLACEHOLDER]</td>
+                <div class="card-header">
 
-<td>Strogonoff de Frango  [PLACEHOLDER]</td>
+                    <div class="icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
 
-</tr>
+                    <div>
+                        <h2>Terça-feira</h2>
+                        <span>08/07/2026</span>
+                    </div>
 
-<tr>
+                </div>
 
-<td>10/07  [PLACEHOLDER]</td>
+                <img class="menu-image" src="static/imgs/refeitorio.png" alt="Prato do dia">
 
-<td>Feijoada  [PLACEHOLDER]</td>
+                <h3>Descrição</h3>
+                <p>
+                    Frango assado com batatas, acompanhado de arroz e salada.
+                </p>
 
-</tr>
+            </article>
 
-</tbody>
+            <article class="menu-card">
 
-</table>
+                <div class="card-header">
 
-</div>
+                    <div class="icon">
+                        <i class="fa-solid fa-drumstick-bite"></i>
+                    </div>
 
-</div>
+                    <div>
+                        <h2>Quarta-feira</h2>
+                        <span>09/07/2026</span>
+                    </div>
 
-<a href="/public/form.php" class="voltar">
-    ← Voltar para o Formulário
-</a>
+                </div>
+
+                <img class="menu-image" src="static/imgs/refeitorio.png" alt="Prato do dia">
+
+                <h3>Descrição</h3>
+                <p>
+                    Frango assado com batatas, acompanhado de arroz e salada.
+                </p>
+
+            </article>
+
+            <article class="menu-card quinta">
+
+                <div class="card-header">
+
+                    <div class="icon">
+                        <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+
+                    <div>
+                        <h2>Quinta-feira</h2>
+                        <span>10/07/2026</span>
+                    </div>
+
+                </div>
+
+                <img class="menu-image" src="static/imgs/refeitorio.png" alt="Prato do dia">
+
+                <h3>Descrição</h3>
+                <p>
+                    Frango assado com batatas, acompanhado de arroz e salada.
+                </p>
+
+            </article>
+
+            <article class="menu-card sexta">
+
+                <div class="card-header">
+
+                    <div class="icon">
+                        <i class="fa-solid fa-pizza-slice"></i>
+                    </div>
+
+                    <div>
+                        <h2>Sexta-feira</h2>
+                        <span>11/07/2026</span>
+                    </div>
+
+                </div>
+
+                <img class="menu-image" src="static/imgs/refeitorio.png" alt="Prato do dia">
+
+                <h3>Descrição</h3>
+                <p>
+                    Frango assado com batatas, acompanhado de arroz e salada.
+                </p>
+
+            </article>
+
+        </section>
+
+    </main>
 
 </body>
+
 </html>

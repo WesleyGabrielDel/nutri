@@ -5,7 +5,6 @@ require_once __DIR__ . '/../../bootstrap.php';
 
 // Pegando as informações enviadas
 $data = json_decode(file_get_contents('php://input'), true);
-$data["route"] = "get-data";
 
 if (!$data || !isset($data["route"])) {
     die("Rota não selecionada.");
@@ -23,6 +22,18 @@ switch ($data['route']) {
 
     case "login":
         echo AuthService::Login($data);
+        break;
+
+    case "signup":
+        echo AuthService::SignUp($data);
+        break;
+
+    case "menu-send":
+        echo DataService::SendMenu($data);
+        break;
+
+    case "logout":
+        echo AuthService::Logout();
         break;
 
     default:

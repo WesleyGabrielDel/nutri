@@ -1,27 +1,74 @@
+import { request, API_BASE_URL, showToast } from "./lib/lib.js";
 
-    const form = document.querySelector('form');
-    const botaoConfirmar = document.querySelector('button[type="submit"]');
+function setupUserMenu() {
+    const userMenu = document.querySelector('.user-menu');
+    const userTrigger = document.querySelector('.user-trigger');
+    const logoutBtn = document.getElementById('logout-btn');
 
-    botaoConfirmar.addEventListener('click', function(event) {
+    if (!userMenu || !userTrigger || !logoutBtn) {
+        return;
+    }
+
+    userTrigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        userMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!userMenu.contains(event.target)) {
+            userMenu.classList.remove('open');
+        }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+        await request(API_BASE_URL, 'POST', {
+            body: JSON.stringify({ route: 'logout' })
+        });
+
+        window.location.reload();
+    });
+}
+
+const form = document.querySelector('.meal-form');
+const botaoConfirmar = document.querySelector('.confirm-btn');
+
+function getSelectedOption() {
+    const options = document.querySelectorAll('input[name="refeicao"]');
+    return Array.from(options).find((option) => option.checked) || null;
+}
+
+setupUserMenu();
+
+if (form && botaoConfirmar) {
+    botaoConfirmar.addEventListener('click', async function (event) {
         event.preventDefault();
 
-        const opcaoSelecionada = document.querySelector('input[name="opcao_comida"]:checked');
-        const repetirAutomatico = document.getElementById('repetir').checked;
+        const opcaoSelecionada = getSelectedOption();
 
         if (!opcaoSelecionada) {
-            alert('Por favor, selecione uma das opções de refeição antes de confirmar!');
+            showToast('Por favor, selecione uma das opções de refeição antes de confirmar!', 'warning');
             return;
         }
 
-        const nomeRefeicao = opcaoSelecionada.closest('label').querySelector('span').innerText;
+        const valorRefeicao = opcaoSelecionada.value;
+        const willEat = valorRefeicao === 'sim' ? 1 : 0;
 
-        const dadosFormulario = {
-            refeicao: nomeRefeicao,
-            repetirAutomaticamente: repetirAutomatico,
-            dataEnvio: new Date().toLocaleDateString('pt-BR')
-        };
+        try {
+            const response = await request(API_BASE_URL, 'POST', {
+                body: JSON.stringify({
+                    route: 'send-form',
+                    will_eat: willEat
+                })
+            });
 
-        console.log('Dados enviados com sucesso:', dadosFormulario);
+            if (response?.success === false) {
+                throw new Error(response?.message || 'Erro ao enviar o formulário.');
+            }
 
-        alert(`Sucesso!\n\nSua escolha: "${nomeRefeicao}" foi confirmada.\nRepetição automática: ${repetirAutomatico ? 'Ativada ✅' : 'Desativada ❌'}`);
+            showToast(response?.message || 'Formulário enviado com sucesso!', 'success');
+        } catch (error) {
+            console.error(error);
+            showToast(error.message || 'Não foi possível enviar o formulário.', 'error');
+        }
     });
+}

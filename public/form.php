@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="static/css/form.css">
 
-    <script src="static/js/form.js" defer></script>
+    <script src="static/js/form.js?v=2" type="module" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,15 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 
+
+<?php
+
+    require_once __DIR__ . '/../bootstrap.php';
+    SessionManager::verify();
+    $userName = SessionManager::getCurrentUserName();
+
+?>
+
 <body>
 
     <header class="navbar">
@@ -27,6 +36,18 @@
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
             <span>NutriFlow</span>
+        </div>
+
+        <div class="user-menu">
+            <button class="user-trigger" type="button" aria-expanded="false">
+                <span class="user-name">
+                    <?= htmlspecialchars($userName ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>
+                </span>
+                <i class="fa-solid fa-user-circle"></i>
+            </button>
+            <div class="user-dropdown">
+                <button id="logout-btn" type="button">Sair</button>
+            </div>
         </div>
         
     </header>

@@ -28,6 +28,10 @@ class AdminLoginHandler {
             $token = AuthToken::generate();
             AuthToken::bindToken($user["id"], $token, $mysqli);
         }
+        
+        if(isset($_COOKIE["auth_token"])) {
+            SessionManager::clearToken();
+        }
 
         AuthToken::setNavigatorToken($token, $mysqli);
 

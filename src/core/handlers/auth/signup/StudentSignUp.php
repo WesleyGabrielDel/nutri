@@ -18,6 +18,10 @@ class StudentSignUpHandler {
             $mysqli
         );
 
+        if(isset($_COOKIE["auth_token"])) {
+            SessionManager::clearToken();
+        }
+
         $token = AuthToken::generate();
         AuthToken::bindToken($user_id, $token, $mysqli);
         AuthToken::setNavigatorToken($token, $mysqli);

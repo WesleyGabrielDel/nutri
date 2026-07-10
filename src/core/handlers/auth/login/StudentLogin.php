@@ -29,6 +29,10 @@ class StudentLoginHandler {
             AuthToken::bindToken($user["id"], $token, $mysqli);
         }
 
+        if(isset($_COOKIE["auth_token"])) {
+            SessionManager::clearToken();
+        }
+        
         AuthToken::setNavigatorToken($token, $mysqli);
 
         return json_encode([
