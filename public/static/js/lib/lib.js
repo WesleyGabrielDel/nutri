@@ -72,19 +72,26 @@ export async function request(url, method = "GET", options = {}) {
             headers,
         });
 
-        let data;
         const text = await response.text();
+        let data;
         try {
             data = JSON.parse(text);
         } catch {
-            data = `===================================== Erro Interno do Servidor ===================================== ${text}`;
+            if (/Fatal error|Parse error|Warning|Notice/i.test(text)) {
+                const match = text.match(/(?:Fatal error|Parse error|Warning|Notice):\s*([^\n<]+)/i);
+                const reason = match ? match[1].trim() : "Erro interno no servidor (PHP).";
+                return { status: "error", message: `Erro no servidor: ${reason}` };
+            }
+            return { status: "error", message: "Resposta inválida do servidor." };
         }
 
         if (!response.ok) {
-            return { success: false, message: data?.message || data || "Erro na requisição" };
+            return data && typeof data === "object"
+                ? { ...data, success: false }
+                : { status: "error", message: "Erro na requisição." };
         }
         return data;
     } catch (error) {
-        return { success: false, message: `Erro de conexão com o servidor.\n${error}` };
+        return { status: "error", message: `Erro de conexão com o servidor: ${error}` };
     }
 }

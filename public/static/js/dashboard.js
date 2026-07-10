@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const presenceCtx = document.getElementById('presenceChart');
     const demandCtx = document.getElementById('demandChart');
 
+    if (window.Chart) {
+        Chart.defaults.font.family = "'Plus Jakarta Sans', 'Segoe UI', sans-serif";
+        Chart.defaults.font.weight = '500';
+        Chart.defaults.color = '#5F5E5A';
+    }
+
     if (presenceCtx) {
         presenceChart = new Chart(presenceCtx.getContext('2d'), {
             type: 'doughnut',
@@ -43,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 labels: ['Confirmados', 'Cancelados', 'Sem resposta'],
                 datasets: [{
                     data: [0, 0, 0],
-                    backgroundColor: ['#22c55e', '#ef4444', '#38bdf8'],
-                    borderColor: '#0b1220',
-                    borderWidth: 2,
+                    backgroundColor: ['#639922', '#E24B4A', '#EF9F27'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3,
                 }]
             },
             options: {
@@ -56,17 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#cbd5e1',
+                            color: '#5F5E5A',
                             boxWidth: 12,
                             padding: 16,
+                            font: { size: 13, weight: '500' }
                         }
                     },
                     tooltip: {
-                        backgroundColor: '#0b1220',
-                        titleColor: '#ffffff',
-                        bodyColor: '#cbd5e1',
-                        borderColor: '#2563eb',
-                        borderWidth: 1
+                        backgroundColor: '#FFFFFF',
+                        titleColor: '#085041',
+                        bodyColor: '#2C2C2A',
+                        borderColor: '#E2DFD5',
+                        borderWidth: 1,
+                        padding: 12
                     }
                 }
             }
@@ -81,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Refeições',
                     data: [0, 0, 0],
-                    backgroundColor: ['#2563eb', '#22c55e', '#ef4444'],
-                    borderRadius: 16,
+                    backgroundColor: ['#0F6E56', '#639922', '#E24B4A'],
+                    borderRadius: 8,
                     barThickness: 28
                 }]
             },
@@ -91,24 +99,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 maintainAspectRatio: false,
                 scales: {
                     x: {
-                        ticks: { color: '#cbd5e1' },
+                        ticks: { color: '#5F5E5A', font: { size: 13, weight: '500' } },
                         grid: { display: false }
                     },
                     y: {
-                        ticks: { color: '#cbd5e1' },
+                        ticks: { color: '#5F5E5A', font: { size: 13, weight: '500' } },
                         grid: {
-                            color: 'rgba(148,163,184,0.12)'
+                            color: 'rgba(95,94,90,0.10)'
                         }
                     }
                 },
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        backgroundColor: '#0b1220',
-                        titleColor: '#ffffff',
-                        bodyColor: '#cbd5e1',
-                        borderColor: '#2563eb',
-                        borderWidth: 1
+                        backgroundColor: '#FFFFFF',
+                        titleColor: '#085041',
+                        bodyColor: '#2C2C2A',
+                        borderColor: '#E2DFD5',
+                        borderWidth: 1,
+                        padding: 12
                     }
                 }
             }
@@ -162,6 +171,8 @@ function setData(data) {
     if (revenueValue) revenueValue.textContent = `R$ ${revenue.toFixed(2).replace('.', ',')}`;
     if (occupancyValue) occupancyValue.textContent = `${occupancyRate}%`;
 
+    updateWasteStatus(cancelled, confirmed, total);
+
     if (presenceChart) {
         presenceChart.data.datasets[0].data = [confirmed, cancelled, pending];
         presenceChart.update();
@@ -170,5 +181,50 @@ function setData(data) {
     if (demandChart) {
         demandChart.data.datasets[0].data = [total, confirmed, cancelled];
         demandChart.update();
+    }
+}
+
+function updateWasteStatus(cancelled, confirmed, total) {
+    const cancelledLabel = document.getElementById('cancelledLabel');
+    const forecastLabel = document.getElementById('forecastLabel');
+    const totalMealsDot = document.getElementById('totalMealsDot');
+
+    if (total <= 0) return;
+
+    const cancelRate = cancelled / total;
+
+    function setLabel(labelEl, state, word) {
+        if (!labelEl) return;
+        labelEl.classList.remove('ok', 'attn', 'bad');
+        labelEl.classList.add(state);
+        const dot = labelEl.querySelector('.status-dot');
+        if (dot) {
+            dot.classList.remove('ok', 'attn', 'bad');
+            dot.classList.add(state);
+        }
+        const node = labelEl.lastChild;
+        if (node && node.nodeType === Node.TEXT_NODE) {
+            node.textContent = ' ' + word;
+        }
+    }
+
+    if (cancelRate >= 0.25) {
+        setLabel(cancelledLabel, 'bad', 'Alto');
+    } else if (cancelRate >= 0.10) {
+        setLabel(cancelledLabel, 'attn', 'Atenção');
+    } else {
+        setLabel(cancelledLabel, 'ok', 'OK');
+    }
+
+    const coverage = confirmed / total;
+    if (forecastLabel) {
+        if (coverage >= 0.7) setLabel(forecastLabel, 'ok', 'No esperado');
+        else if (coverage >= 0.4) setLabel(forecastLabel, 'attn', 'Atenção');
+        else setLabel(forecastLabel, 'bad', 'Rever');
+    }
+
+    if (totalMealsDot) {
+        totalMealsDot.classList.remove('ok', 'attn', 'bad');
+        totalMealsDot.classList.add(coverage >= 0.5 ? 'ok' : 'attn');
     }
 }

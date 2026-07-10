@@ -166,11 +166,57 @@ class AuthService {
             return "A senha deve ter no mínimo 8 caracteres.";
         }
 
-        if (!self::isValidCpf($cpf)) {
-            return "CPF inválido.";
+        if (!self::isValidCpfOrCnpj($cpf)) {
+            return "CPF/CNPJ inválido.";
         }
 
         return true;
+    }
+
+    private static function isValidCpfOrCnpj($doc) {
+        $doc = preg_replace('/\D/', '', (string) $doc);
+
+        if (strlen($doc) === 11) {
+            return self::isValidCpf($doc);
+        }
+
+        if (strlen($doc) === 14) {
+            return self::isValidCnpj($doc);
+        }
+
+        return false;
+    }
+
+    private static function isValidCnpj($cnpj) {
+        $cnpj = preg_replace('/\D/', '', (string) $cnpj);
+
+        if (strlen($cnpj) !== 14 || preg_match('/^(\d)\1{13}$/', $cnpj)) {
+            return false;
+        }
+
+        $weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $sum = 0;
+        for ($i = 0; $i < 12; $i++) {
+            $sum += intval($cnpj[$i]) * $weights1[$i];
+        }
+
+        $firstDigit = $sum % 11;
+        $firstDigit = $firstDigit < 2 ? 0 : 11 - $firstDigit;
+
+        if ($firstDigit !== intval($cnpj[12])) {
+            return false;
+        }
+
+        $weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $sum = 0;
+        for ($i = 0; $i < 13; $i++) {
+            $sum += intval($cnpj[$i]) * $weights2[$i];
+        }
+
+        $secondDigit = $sum % 11;
+        $secondDigit = $secondDigit < 2 ? 0 : 11 - $secondDigit;
+
+        return $secondDigit === intval($cnpj[13]);
     }
 
     private static function isValidCpf($cpf) {

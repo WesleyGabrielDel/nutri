@@ -40,9 +40,6 @@ const BaseUrl = "http://localhost/nutri/";
 const adminCadastro = document.getElementById("admin-cadastro")
 const alunoCadastro = document.getElementById("aluno-cadastro")
 
-const luz = document.querySelector(".luz");
-const card = document.querySelector("#entrar-aluno", "#entrar-admin");
-
 document.addEventListener("DOMContentLoaded", () => {
     setupUserMenu();
     allBack = document.querySelectorAll(".voltar");
@@ -144,8 +141,3 @@ function setListeners(loginForms) {
         });
     });
 }
-
-card.addEventListener("mousemove", (e)=> {
-    mouseX = e.mouseX;
-    mouseY = e.mouseY;
-})

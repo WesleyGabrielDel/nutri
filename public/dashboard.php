@@ -7,16 +7,17 @@
 
     <title>NutriFlow | Dashboard</title>
 
-    <link rel="stylesheet" href="./static/css/dashboard.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/tokens.css">
+    <link rel="stylesheet" href="static/css/dashboard.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="./static/js/dashboard.js" type="module" defer></script>
 </head>
@@ -39,8 +40,8 @@
         </div>
 
         <nav class="nav-links">
-            <a href="#">Dashboard</a>
-            <a href="#">Cardápio</a>
+            <a href="dashboard.php" class="active">Dashboard</a>
+            <a href="cardapioadm.php">Cardápio</a>
             <a href="#">Histórico</a>
             <a href="#">Configurações</a>
         </nav>
@@ -121,103 +122,73 @@
         <section class="dashboard-metrics">
 
             <article class="metric-card">
-
-                <div class="metric-icon blue">
-                    <i class="fa-solid fa-utensils"></i>
+                <div class="metric-top">
+                    <div class="metric-icon teal">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <span class="status-dot ok" id="totalMealsDot"></span>
                 </div>
 
-                <span>
-                    Refeições necessárias
-                </span>
-
-                <strong id="totalMeals">
-                    152
-                </strong>
-
-                <small>
-                    Quantidade prevista para o turno.
-                </small>
-
+                <span class="metric-label">Refeições necessárias</span>
+                <strong id="totalMeals" class="metric-value">152</strong>
+                <small class="metric-sub">Quantidade prevista para o turno.</small>
             </article>
 
             <article class="metric-card">
-
-                <div class="metric-icon green">
-                    <i class="fa-solid fa-circle-check"></i>
+                <div class="metric-top">
+                    <div class="metric-icon ok">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <span class="status-label ok" id="confirmedLabel">
+                        <span class="status-dot ok"></span> OK
+                    </span>
                 </div>
 
-                <span>
-                    Confirmados
-                </span>
-
-                <strong id="confirmedMeals">
-                    0
-                </strong>
-
-                <small>
-                    Alunos que confirmaram presença.
-                </small>
-
+                <span class="metric-label">Confirmados</span>
+                <strong id="confirmedMeals" class="metric-value">0</strong>
+                <small class="metric-sub">Alunos que confirmaram presença.</small>
             </article>
 
             <article class="metric-card">
-
-                <div class="metric-icon red">
-                    <i class="fa-solid fa-circle-xmark"></i>
+                <div class="metric-top">
+                    <div class="metric-icon bad">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <span class="status-label bad" id="cancelledLabel">
+                        <span class="status-dot bad"></span> Alto
+                    </span>
                 </div>
 
-                <span>
-                    Cancelados
-                </span>
-
-                <strong id="cancelledMeals">
-                    0
-                </strong>
-
-                <small>
-                    Alunos que cancelaram a refeição.
-                </small>
-
+                <span class="metric-label">Cancelados</span>
+                <strong id="cancelledMeals" class="metric-value">0</strong>
+                <small class="metric-sub">Alunos que cancelaram a refeição.</small>
             </article>
 
             <article class="metric-card">
-
-                <div class="metric-icon orange">
-                    <i class="fa-solid fa-wheat-awn"></i>
+                <div class="metric-top">
+                    <div class="metric-icon amber">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <span class="status-label attn" id="forecastLabel">
+                        <span class="status-dot attn"></span> Atenção
+                    </span>
                 </div>
 
-                <span>
-                    Previsão de alimento
-                </span>
-
-                <strong id="foodForecast">
-                    0 kg
-                </strong>
-
-                <small>
-                    Quantidade estimada de insumos.
-                </small>
-
+                <span class="metric-label">Previsão de alimento</span>
+                <strong id="foodForecast" class="metric-value">0 kg</strong>
+                <small class="metric-sub">Quantidade estimada de insumos.</small>
             </article>
 
             <article class="metric-card highlight">
-
-                <div class="metric-icon money">
-                    <i class="fa-solid fa-sack-dollar"></i>
+                <div class="metric-top">
+                    <div class="metric-icon teal">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
                 </div>
 
-                <span>
-                    Custo previsto
-                </span>
-
-                <strong id="estimatedCost">
-                    R$ 0,00
-                </strong>
-
-                <small>
-                    Estimativa total do turno.
-                </small>
-
+                <span class="metric-label">Custo previsto</span>
+                <strong id="estimatedCost" class="metric-value">R$ 0,00</strong>
+                <small class="metric-sub">Estimativa total do turno.</small>
             </article>
 
         </section>

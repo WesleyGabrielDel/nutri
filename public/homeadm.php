@@ -11,13 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriFlow | Home</title>
 
-    <link rel="stylesheet" href="static/css/homeadm.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="static/css/tokens.css">
+    <link rel="stylesheet" href="static/css/homeadm.css">
 
     <script src="static/js/home.js" type="module" defer></script>
 </head>
@@ -72,7 +73,7 @@
 
         <section class="cards">
 
-            <a href="#" class="card">
+            <a href="cardapioadm.php" class="card">
                 <div class="icon">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
@@ -85,7 +86,7 @@
 
             </a>
 
-            <a href="#" class="card">
+            <a href="dashboard.php" class="card">
 
                 <div class="icon">
                     <i class="fa-solid fa-circle-check"></i>
@@ -94,7 +95,7 @@
                 <h2>Dashboard de Alunos</h2>
 
                 <p>
-                    veja a demanda de alimentos do dia e quantas refeições serão necessárias
+                    Veja a demanda de alimentos do dia e quantas refeições serão necessárias
                 </p>
 
             </a>

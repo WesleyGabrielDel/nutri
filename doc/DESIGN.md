@@ -1,111 +1,116 @@
-# Documento de Design de Software (DESIGN.md)
-## Sistema de Controle de Economia de Merenda Escolar (NutriEconomia)
+# Design System — App de Controle de Desperdício Escolar
 
-Este documento descreve a arquitetura, o design de interface e a estrutura de dados para o sistema **NutriEconomia**, uma ferramenta projetada para otimizar os gastos, reduzir o desperdício e gerenciar o estoque da merenda escolar de forma simples e eficiente.
+Sistema de design para o aplicativo de apoio às merendeiras no planejamento de refeições e redução de desperdício de alimentos em escolas.
 
----
+## Contexto de uso
 
-## 1. Visão Geral do Sistema
+Antes das cores, o motivo delas: o app será usado por merendeiras, geralmente em tablets ou celulares dentro da cozinha, muitas vezes com as mãos ocupadas, sob luz forte, com pouco tempo para ler texto longo. Isso significa:
 
-O objetivo principal do sistema é dar visibilidade financeira e operacional sobre o uso dos recursos destinados à alimentação escolar. Ele atende desde o almoxarife que recebe os alimentos até a secretaria de educação que analisa os relatórios de economia.
-
-### Benefícios Chave:
-* **Redução de Desperdício:** Controle rigoroso de datas de validade e consumo médio.
-* **Transparência Financeira:** Gráficos claros de economia gerada em relação ao orçamento.
-* **Facilidade de Uso:** Interface limpa e adaptada para funcionários de diferentes níveis de familiaridade com tecnologia.
+- Leitura rápida à distância importa mais que sofisticação visual.
+- Cor deve comunicar status sem depender de texto.
+- Contraste alto é obrigatório (equipamentos variados, más condições de luz).
+- Tom acolhedor, não clínico — é comida para crianças, não uma planilha de estoque.
 
 ---
 
-## 2. Identidade Visual e Interface (UI)
+## Paleta de cores
 
-O design foi pensado para ser acolhedor (remetendo à alimentação/escola) e altamente profissional (remetendo ao controle financeiro).
+### Cor primária — Teal (verde-azulado)
 
-### Paleta de Cores
+Transmite confiança, controle e organização, sem cair no verde "sustentabilidade" clichê. Usada em ações principais, navegação e identidade da marca.
 
-* **Primária (Ações e Sucesso):** `Verde Sálvia (#4A7C59)` — Usado em botões de salvar, indicadores de economia e saldo positivo. Transmite saúde e equilíbrio.
-* **Secundária (Estrutura e Texto):** `Azul Profundo (#2C3E50)` — Usado em menus, cabeçalhos e textos principais. Transmite confiança e segurança de dados.
-* **Destaque (Alertas e Atenção):** `Amarelo Mostarda (#F4A261)` — Usado para avisos de itens perto do vencimento ou estoque mínimo atingido.
-* **Fundo Geral:** `Cinza Claro (#F8F9FA)` — Reduz a fadiga visual em tabelas e listas longas.
-* **Fundo de Blocos:** `Branco (#FFFFFF)` — Usado em cards, tabelas e gráficos para destacar as informações sobre o fundo cinza.
+| Token       | Hex       | Uso                                  |
+|-------------|-----------|---------------------------------------|
+| `teal-900`  | `#04342C` | Texto sobre fundos claros de teal     |
+| `teal-800`  | `#085041` | Texto principal, títulos de destaque  |
+| `teal-600`  | `#0F6E56` | Botões primários, links, ícones ativos|
+| `teal-400`  | `#1D9E75` | Estados hover, elementos secundários  |
+| `teal-100`  | `#9FE1CB` | Fundos leves, badges                  |
+| `teal-50`   | `#E1F5EE` | Fundo de cards e seções destacadas    |
 
-### Tipografia
-* **Títulos:** *Inter* ou *Roboto* (Peso: 600) — Excelente legibilidade na tela.
-* **Texto Corpo:** *Inter* (Peso: 400) — Espaçamento limpo, confortável para leitura de relatórios.
+### Cor de apoio — Âmbar
 
----
+Remete a comida, calor e acolhimento. Cria contraste quente contra o teal frio e evita a sensação de aplicativo puramente administrativo.
 
-## 3. Arquitetura do Sistema
+| Token        | Hex       | Uso                                   |
+|--------------|-----------|----------------------------------------|
+| `amber-900`  | `#412402` | Texto sobre fundos claros de âmbar    |
+| `amber-800`  | `#854F0B` | Texto de destaque secundário          |
+| `amber-200`  | `#EF9F27` | Ícones, elementos de atenção suave    |
+| `amber-100`  | `#FAC775` | Fundos de destaque, badges            |
+| `amber-50`   | `#FAEEDA` | Fundo de seções de apoio              |
 
-O sistema utiliza uma arquitetura baseada em serviços simples (Monolítico Modular ou Cliente-Servidor) para garantir facilidade de manutenção e baixo custo de hospedagem.
+### Cores de estado (semáforo de desperdício)
 
-```
-+-------------------------------------------------------+
-|                    Camada de UI                       |
-|          (Painel Web / Mobile Responsivo)            |
-+---------------------------+---------------------------+
-                            | (Requisições HTTP/JSON)
-                            v
-+-------------------------------------------------------+
-|                  Camada de Negócio                    |
-|       (Módulo de Estoque, Finanças e Alertas)         |
-+---------------------------+---------------------------+
-                            | (ORM / SQL)
-                            v
-+-------------------------------------------------------+
-|                  Banco de Dados                       |
-|           (PostgreSQL / SQLite p/ Escolas)            |
-+-------------------------------------------------------+
-```
+Usadas exclusivamente para indicar status — nunca como cor de marca ou decoração. Este é o elemento mais importante da interface: precisa ser identificável sem leitura de texto.
 
----
+| Estado             | Token      | Hex       | Significado                              |
+|---------------------|------------|-----------|--------------------------------------------|
+| Dentro do esperado  | `green-400`| `#639922` | Sobra de comida dentro da margem planejada|
+| Atenção             | `amber-200`| `#EF9F27` | Sobra acima do esperado, revisar próximo pedido |
+| Desperdício alto    | `red-400`  | `#E24B4A` | Ajuste urgente na quantidade preparada    |
 
-## 4. Estrutura do Banco de Dados (Simplificado)
+Regra: cor de estado nunca deve ser reutilizada para outro propósito na interface (ex: não usar vermelho em botão de "excluir" se não for relacionado a desperdício, para não confundir o significado).
 
-Para garantir o controle de economia, o banco de dados foca na relação entre compras, estoque e consumo diário.
+### Neutros — fundo e texto
 
-### Tabela: `Alimentos`
-* `id` (UUID, Chave Primária)
-* `nome` (Texto) — Ex: Arroz Agulhinha Tipo 1
-* `unidade_medida` (Texto) — Ex: KG, Litro, Pacote
-* `estoque_minimo` (Decimal) — Para disparar alertas
+Tons quentes (bege, não cinza-azulado), para combinar com o âmbar e manter a sensação acolhedora.
 
-### Tabela: `Lotes_Estoque`
-* `id` (UUID, Chave Primária)
-* `alimento_id` (Chave Estrangeira para Alimentos)
-* `quantidade_atual` (Decimal)
-* `preco_unitario` (Decimal) — Essencial para o cálculo de economia
-* `data_validade` (Data)
-
-### Tabela: `Consumo_Diario`
-* `id` (UUID, Chave Primária)
-* `alimento_id` (Chave Estrangeira)
-* `quantidade_utilizada` (Decimal)
-* `data_consumo` (Data)
-* `numero_alunos_servidos` (Inteiro) — Ajuda a calcular o custo per capita
+| Token            | Hex       | Uso                          |
+|------------------|-----------|-------------------------------|
+| `neutral-bg`     | `#F1EFE8` | Fundo geral do app            |
+| `neutral-card`   | `#FFFFFF` | Fundo de cards e formulários  |
+| `neutral-text-2` | `#5F5E5A` | Texto secundário, legendas    |
+| `neutral-text-1` | `#2C2C2A` | Texto principal                |
 
 ---
 
-## 5. Fluxos Principais de Telas
+## Contraste e acessibilidade
 
-### Tela 1: Dashboard de Economia (Tela Principal)
-* **Topo:** 3 Cards de Resumo:
-    1.  *Orçamento Disponível* (Texto em Azul Profundo)
-    2.  *Economia Gerada no Mês* (Texto em Verde Sálvia)
-    3.  *Alertas Críticos* (Texto em Amarelo Mostarda — Ex: "3 itens vencendo esta semana")
-* **Centro:** Gráfico de linha mostrando a evolução do gasto real versus o orçamento planejado ao longo dos meses.
-
-### Tela 2: Registro de Consumo Diário
-* Formulário simples onde a cozinheira ou responsável insere o que foi gasto no dia.
-* **Campos:** Seleção do Alimento, Quantidade Usada, Número de Alunos.
-* **Inteligência do Sistema:** O sistema abate automaticamente do lote mais antigo (método PEPS - Primeiro que Entra, Primeiro que Sai) para evitar desperdício por vencimento.
-
-### Tela 3: Relatório de Economia e Desperdício
-* Tabela interativa com filtros por data.
-* Exibe o quanto a escola economizou ao reutilizar ingredientes de forma eficiente ou otimizar as porções com base no número real de alunos presentes.
+- Combinações validadas para WCAG AA: `teal-600` sobre branco, `amber-800` sobre `amber-50`, `neutral-text-1` sobre `neutral-bg`.
+- Nunca depender apenas da cor para indicar estado — sempre acompanhar de ícone ou texto curto (ex: um círculo verde + a palavra "OK").
+- Tamanho mínimo de fonte: 14px para texto de interface, 16px+ para números importantes (quantidade de refeições, sobras).
 
 ---
 
-## 6. Regras de Negócio para Economia
+## Tipografia
 
-1.  **Cálculo de Desperdício Evitado:** Se um item está a menos de 15 dias do vencimento e o sistema alerta o gestor para remanejá-lo ou priorizá-lo no cardápio, o valor financeiro total desse item é contabilizado no painel como "Economia Potencial Salva".
-2.  **Custo Per Capita:** O sistema calcula automaticamente: `(Quantidade Utilizada × Preço Unitário) ÷ Número de Alunos`. Se o valor ficar abaixo da meta estipulada pelo governo/município sem perder a qualidade nutricional, a diferença é somada à "Economia Realizada".
+Sistema simples, sem serifa, priorizando legibilidade em telas pequenas e em movimento.
+
+| Nível         | Tamanho | Peso | Uso                          |
+|----------------|---------|------|--------------------------------|
+| Título         | 22px    | 500  | Cabeçalhos de tela             |
+| Subtítulo      | 18px    | 500  | Seções dentro da tela          |
+| Corpo          | 16px    | 400  | Texto padrão                   |
+| Números-chave  | 24–32px | 500  | Quantidade de refeições, sobras|
+| Legenda        | 13px    | 400  | Textos de apoio, timestamps    |
+
+Apenas dois pesos (400 e 500) — evita inconsistência visual e mantém a interface leve.
+
+---
+
+## Componentes principais
+
+### Indicador de status (semáforo)
+Círculo colorido + rótulo curto. É o elemento central da tela principal, deve ser visível e compreensível em menos de 1 segundo de leitura.
+
+### Cards de registro de refeição
+Fundo branco, borda sutil, cantos arredondados (12px). Usados para exibir cada refeição do dia com quantidade preparada, servida e sobra.
+
+### Botões
+- Primário (teal-600): ação principal da tela, ex: "Registrar sobra".
+- Secundário (borda, sem preenchimento): ações alternativas, ex: "Ver histórico".
+- Nunca mais de um botão primário por tela.
+
+### Badges de quantidade
+Fundo em tom claro da cor de estado correspondente (ex: `amber-50` com texto `amber-800`), usados para sinalizar rapidamente quantidades em listas.
+
+---
+
+## Princípios de uso
+
+1. **Cor comunica, não decora.** Toda cor de estado (verde/âmbar/vermelho) tem significado fixo em todo o app.
+2. **Silêncio visual.** Poucas cores por tela — teal + âmbar + neutros, com estado aparecendo pontualmente.
+3. **Números grandes, texto curto.** A cantina não tem tempo para ler parágrafos; priorizar dados numéricos com destaque visual.
+4. **Contraste antes de estética.** Em caso de dúvida entre um tom mais bonito e um mais legível, escolher o mais legível.
+5. **Consistência de significado.** Uma cor nunca deve significar coisas diferentes em telas diferentes.
