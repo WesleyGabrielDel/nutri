@@ -125,10 +125,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setupUserMenu();
+    connectDashboardWebSocket();
     fetchData();
 });
 
-async function fetchData() {
+function connectDashboardWebSocket() {
+    const socketUrl = 'ws://127.0.0.1:8000/ws';
+    const ws = new WebSocket(socketUrl);
+
+    ws.addEventListener('open', () => {
+        console.log('WebSocket conectado ao servidor Python.');
+    });
+
+    ws.addEventListener('message', (event) => {
+        const message = event.data;
+        if (message === 'dados_atualizados') {
+            console.log('Atualização recebida via WebSocket:', message);
+            fetchData(true);
+        } else {
+            console.warn('Mensagem WebSocket desconhecida:', message);
+        }
+    });
+
+    ws.addEventListener('close', () => {
+        console.warn('WebSocket desconectado. Tentando reconectar em 3s...');
+        setTimeout(connectDashboardWebSocket, 3000);
+    });
+
+    ws.addEventListener('error', (error) => {
+        console.error('Erro no WebSocket:', error);
+    });
+}
+
+async function fetchData(animate = false) {
     const response = await request(API_BASE_URL, 'POST', {
         body: JSON.stringify({
             route: 'get-data'
@@ -140,10 +169,24 @@ async function fetchData() {
         return;
     }
 
-    setData(response);
+    setData(response, animate);
 }
 
-function setData(data) {
+function updateMetricText(element, newText, animate) {
+    if (!element) return;
+    const oldText = element.textContent?.trim() || '';
+    if (oldText === newText) {
+        return;
+    }
+    element.textContent = newText;
+    if (animate) {
+        element.classList.remove('pulse-change');
+        void element.offsetWidth;
+        element.classList.add('pulse-change');
+    }
+}
+
+function setData(data, animate = false) {
     const confirmed = data.yes;
     const cancelled = data.not;
     const total = data.quantity;
@@ -163,13 +206,12 @@ function setData(data) {
         : 0;
     const revenue = Number(confirmed || 0) * 12.5;
 
-    if (totalMeals) totalMeals.textContent = total;
-    if (confirmedMeals) confirmedMeals.textContent = confirmed;
-    if (cancelledMeals) cancelledMeals.textContent = cancelled;
-    if (foodForecast) foodForecast.textContent = data.predicted_food_kg;
-    if (estimatedCost) estimatedCost.textContent = data.predicted_cost;
-    if (revenueValue) revenueValue.textContent = `R$ ${revenue.toFixed(2).replace('.', ',')}`;
-    if (occupancyValue) occupancyValue.textContent = `${occupancyRate}%`;
+    if (totalMeals) updateMetricText(totalMeals, String(total), animate);
+    if (confirmedMeals) updateMetricText(confirmedMeals, String(confirmed), animate);
+    if (cancelledMeals) updateMetricText(cancelledMeals, String(cancelled), animate);
+    if (foodForecast) updateMetricText(foodForecast, String(data.predicted_food_kg), animate);
+    if (estimatedCost) updateMetricText(estimatedCost, `R$ ${revenue.toFixed(2).replace('.', ',')}`, animate);
+    if (occupancyValue) updateMetricText(occupancyValue, `${occupancyRate}%`, animate);
 
     updateWasteStatus(cancelled, confirmed, total);
 

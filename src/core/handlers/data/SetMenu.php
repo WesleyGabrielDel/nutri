@@ -1,6 +1,6 @@
 <?php
 
-class SendMenuHandler {
+class SetMenuHandler {
 
     private function normalizeDay($day) {
         $value = trim(mb_strtolower((string) $day, 'UTF-8'));
@@ -111,8 +111,16 @@ class SendMenuHandler {
         return $image;
     }
 
-    public function handle($data, $mysqli) {
+    private function getDefaultImageData() {
+        $defaultPath = ROOT_PATH . '/public/static/imgs/refeitorio.png';
+        if (!file_exists($defaultPath)) {
+            return null;
+        }
 
+        return file_get_contents($defaultPath);
+    }
+
+    public function handle($data, $mysqli) {
         $day = $this->normalizeDay($data['day'] ?? '');
         $item = $data['item'] ?? null;
         $image = $data['image'] ?? null;
@@ -148,6 +156,9 @@ class SendMenuHandler {
         }
 
         $imageData = $this->decodeImage($image);
+        if ($imageData === null) {
+            $imageData = $this->getDefaultImageData();
+        }
 
         $updateResult = Database::request(
             "UPDATE {$table} SET nome = ?, image = ?, description = ? WHERE day = ?",
@@ -163,11 +174,18 @@ class SendMenuHandler {
         }
 
         if ($updateResult === 0) {
-            Database::request(
+            $insertResult = Database::request(
                 "INSERT INTO {$table} (day, nome, image, description) VALUES (?, ?, ?, ?)",
                 [$day, $item, $imageData, $description],
                 $mysqli
             );
+
+            if ($insertResult === false) {
+                return json_encode([
+                    'status' => 'error',
+                    'message' => 'Erro ao inserir o cardápio para ' . $day . '.'
+                ]);
+            }
         }
 
         return json_encode([

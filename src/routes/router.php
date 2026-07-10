@@ -32,6 +32,10 @@ switch ($data['route']) {
         echo DataService::SendMenu($data);
         break;
 
+    case "set-menu":
+        echo DataService::SetMenu($data);
+        break;
+
     case "logout":
         echo AuthService::Logout();
         break;

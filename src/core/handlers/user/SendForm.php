@@ -45,11 +45,47 @@ class SendFormHandler {
 
         Database::request("INSERT INTO lista_refeicao (vai_comer, user_id) VALUES (?, ?)", [$willEat, $user_id], $mysqli);
 
+        $this->notifyWebsocket();
+
         return json_encode([
             "status" => "success",
             "message" => "Formulário enviado com sucesso!"
         ]);
-
     }
 
+    private function notifyWebsocket() {
+        $url = 'http://127.0.0.1:8000/atualizar-dados';
+        $payload = json_encode([
+            'type' => 'update',
+            'source' => 'send-form'
+        ]);
+
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-Type: application/json\r\n",
+                'content' => $payload,
+                'timeout' => 2
+            ]
+        ];
+
+        try {
+            if (function_exists('curl_init')) {
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+                curl_exec($ch);
+                curl_close($ch);
+            } else {
+                $context = stream_context_create($options);
+                @file_get_contents($url, false, $context);
+            }
+        } catch (Throwable $e) {
+            // Não interrompe o envio do formulário se o websocket falhar.
+        }
+    }
 }

@@ -137,6 +137,26 @@
     font-variant-numeric: tabular-nums;
 }
 
+.pulse-change {
+    display: inline-block;
+    animation: pulse-change 0.45s ease;
+}
+
+@keyframes pulse-change {
+    0% {
+        transform: scale(1);
+        color: var(--teal-800);
+    }
+    50% {
+        transform: scale(1.12);
+        color: var(--teal-600);
+    }
+    100% {
+        transform: scale(1);
+        color: var(--teal-800);
+    }
+}
+
 .metric-sub {
     color: var(--neutral-text-2);
     line-height: 1.55;
