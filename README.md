@@ -66,7 +66,7 @@ O **NutriFlow** é uma aplicação web desenvolvida para auxiliar escolas no con
 
 ## Equipe
 
-Desenvolvido por estudantes do programa **EnergySave**.
+Desenvolvido por estudantes do **2º B - ADS**.
 
 ---
 
